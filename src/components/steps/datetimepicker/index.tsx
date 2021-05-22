@@ -8,7 +8,7 @@ import {
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
-const { useContext, useState } = React
+const { useContext } = React
 
 const DateTimePicker = () => {
 
@@ -16,7 +16,7 @@ const DateTimePicker = () => {
 
     const handleDateChange = (date: Date | null) => {
         dispatch({
-            type: 'SET',
+            type: 'SET_ANSWER',
             field: 'date',
             payload: date
         })
@@ -24,7 +24,7 @@ const DateTimePicker = () => {
 
     const handleDurationTypeChange = (event: React.ChangeEvent<{ value: string }>) => {
         dispatch({
-            type: 'SET',
+            type: 'SET_ANSWER',
             field: 'durationType',
             payload: event.target.value
         })
@@ -41,7 +41,7 @@ const DateTimePicker = () => {
                         margin="normal"
                         id="date-picker"
                         label="On"
-                        value={state.date}
+                        value={state?.answers?.date}
                         onChange={handleDateChange}
                         KeyboardButtonProps={{
                             'aria-label': 'change date',
@@ -53,7 +53,7 @@ const DateTimePicker = () => {
                         margin="normal"
                         id="time-picker"
                         label="At"
-                        value={state.date}
+                        value={state?.answers?.date}
                         onChange={handleDateChange}
                         KeyboardButtonProps={{
                             'aria-label': 'change time',
@@ -62,7 +62,7 @@ const DateTimePicker = () => {
                 </Grid>
                 <Grid item xs={4}>
                 <FormControl component="fieldset">
-                        <RadioGroup onChange={handleDurationTypeChange} value={state.durationType} aria-label="type" row name="type">
+                        <RadioGroup onChange={handleDurationTypeChange} value={state?.answers?.durationType} aria-label="type" row name="type">
                             <FormControlLabel value="departure" control={<Radio />} label="Departure" />
                             <FormControlLabel value="arrival" control={<Radio />} label="Arrival" />
                         </RadioGroup>

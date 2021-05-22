@@ -16,7 +16,7 @@ const Location = () => {
 
     const handleUpdateState = (value: any, field: string) => {
         dispatch({
-            type: 'SET',
+            type: 'SET_ANSWER',
             field: field,
             payload: value || ''
         })
@@ -30,7 +30,7 @@ const Location = () => {
                     fullWidth={true}
                     id="from"
                     options={stations}
-                    value={state?.from}
+                    value={state?.answers?.from}
                     autoHighlight
                     getOptionLabel={(option) => option}
                     inputValue={fromInputValue}
@@ -57,7 +57,7 @@ const Location = () => {
                     fullWidth={true}
                     id="to"
                     options={stations}
-                    value={state?.to}
+                    value={state?.answers?.to}
                     autoHighlight
                     getOptionLabel={(option) => option}
                     inputValue={toInputValue}

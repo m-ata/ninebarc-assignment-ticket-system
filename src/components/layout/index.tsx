@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Container, Grid, Stepper, Step, StepLabel, Button } from '@material-ui/core';
 import Steps from '../steps'
-import appReducer from '../../store/reducer';
+import appReducer from '../../store/reducers';
 import AppContext from '../../store/context';
 import { initialState } from '../../store/constants';
+import Ticket from '../ticket'
 
-const { useState, useEffect } = React
+const { useState } = React
 
 function getSteps() {
     return ['Name', 'Type', 'Where to move', 'When to move', 'Select Ticket'];
@@ -15,19 +16,27 @@ const Layout = () => {
 
     const [state, dispatch] = React.useReducer(appReducer, initialState);
 
-    useEffect(() => {
-        console.log(state);
-    }, [state]);
-
     const [localState, setLocalState] = useState({
-        activeStep: 0
+        activeStep: 0,
+        isRenderTicket: false
     });
+
+    const finalStep = 4;
     const steps = getSteps();
 
-    const { activeStep } = localState;
+    const { activeStep, isRenderTicket } = localState;
+
+    const handleReset = () => {
+        setLocalState(prev => ({ ...prev, isRenderTicket: false, activeStep: 0 }));
+        dispatch({type: 'RESET'})
+    }
 
     const handleNext = () => {
-        setLocalState(prev => ({ ...prev, activeStep: activeStep + 1 }))
+        if (activeStep === finalStep) {
+            setLocalState(prev => ({ ...prev, isRenderTicket: true }))
+        } else {
+            setLocalState(prev => ({ ...prev, activeStep: activeStep + 1 }))
+        }
     }
 
     const handleBack = () => {
@@ -57,9 +66,12 @@ const Layout = () => {
                     {
                         activeStep > 0 && <Button onClick={handleBack}> Back </Button>
                     }
-                    <Button onClick={handleNext}> Next </Button>
+                    <Button onClick={handleNext}> {activeStep === finalStep ?  'Finish' : 'Next'} </Button>
                 </Grid>
             </Container>
+            {
+                isRenderTicket && <Ticket resetState={handleReset} />
+            }
         </AppContext.Provider>
 
     )

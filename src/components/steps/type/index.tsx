@@ -10,7 +10,7 @@ const Type = () => {
 
     const handleUpdateState = (event: React.ChangeEvent<{ value: string }>, field: string) => {
         dispatch({
-            type: 'SET',
+            type: 'SET_ANSWER',
             field: field,
             payload: event.target.value
         })
@@ -23,7 +23,7 @@ const Type = () => {
             <Grid container>
                 <Grid item xs={6}>
                     <FormControl component="fieldset">
-                        <RadioGroup onChange={(e) => { handleUpdateState(e, 'type') }} value={state.type} aria-label="type" row name="type">
+                        <RadioGroup onChange={(e) => { handleUpdateState(e, 'type') }} value={state?.answers?.type} aria-label="type" row name="type">
                             <FormControlLabel value="single" control={<Radio />} label="Single Ticket" />
                             <FormControlLabel value="multiple" control={<Radio />} label="Multi Ticket" />
                         </RadioGroup>
@@ -32,14 +32,14 @@ const Type = () => {
             </Grid>
 
             {
-                state?.type === 'multiple' &&
+                state?.answers?.type === 'multiple' &&
                 <>
                     <FormLabel component="legend">How many times you want to use this ticket ?</FormLabel>
                     <TextField
                         id="ticker-used"
                         inputProps={{ min: '1', max: '7' }}
                         type="number"
-                        value={state.ticketUsage}
+                        value={state?.answers?.ticketUsage}
                         onChange={(e) => { handleUpdateState(e, 'ticketUsage') }}
                     />
                 </>

@@ -10,7 +10,7 @@ const Name = () => {
 
     const handleChange = (event: React.ChangeEvent<{ value: string }>) => {
         dispatch({
-            type: 'SET',
+            type: 'SET_ANSWER',
             field: 'name',
             payload: event.target.value
         })
@@ -19,7 +19,7 @@ const Name = () => {
     return (
         <Grid container>
             <FormControl component="fieldset">
-                <TextField size={'small'} variant={'outlined'} id="name" type="text" value={state.name} onChange={handleChange} />
+                <TextField size={'small'} variant={'outlined'} id="name" type="text" value={state?.answers?.name} onChange={handleChange} />
             </FormControl>
         </Grid>
     )

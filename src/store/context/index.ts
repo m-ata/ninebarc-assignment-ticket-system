@@ -1,9 +1,9 @@
 import { createContext, Dispatch } from 'react';
 import { initialState } from '../constants';
-import { Answers } from '../../interface';
+import { State } from '../../interface';
 
 const AppContext = createContext<{
-  state: Answers;
+  state: State;
   dispatch: Dispatch<any>;
 }>({
   state: initialState,
