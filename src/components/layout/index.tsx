@@ -15,6 +15,10 @@ const Layout = () => {
 
     const [state, dispatch] = React.useReducer(appReducer, initialState);
 
+    useEffect(() => {
+        console.log(state);
+    }, [state]);
+
     const [localState, setLocalState] = useState({
         activeStep: 0
     });
@@ -34,7 +38,7 @@ const Layout = () => {
         <AppContext.Provider value={{state,dispatch}}>
             <Container>
                 <Grid container >
-                    <Grid item>
+                    <Grid item xs={12}>
                         <Stepper alternativeLabel activeStep={activeStep}>
                             {steps.map((label) => (
                                 <Step key={label}>
@@ -45,7 +49,7 @@ const Layout = () => {
                     </Grid>
                 </Grid>
                 <Grid container>
-                    <Grid item>
+                    <Grid item xs={12}>
                         <Steps activeStep={activeStep} />
                     </Grid>
                 </Grid>

@@ -1,9 +1,9 @@
 export const initialState = {
     name: '',
     type: 'single',
-    days: 1,
+    ticketUsage: 1,
     from: '',
     to: '',
     date: new Date(),
-    dateFilterType: 'deaprture'
+    durationType: 'departure'
 }
