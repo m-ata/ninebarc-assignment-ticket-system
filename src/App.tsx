@@ -1,10 +1,9 @@
 import * as React from 'react';
+import Layout from './../src/components/layout';
 
 const App = () => {
     return (
-        <h3>
-            Welcome to Ticket System 
-        </h3>
+        <Layout />
     )
 }
 export default App;
