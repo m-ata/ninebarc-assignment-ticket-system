@@ -8,11 +8,11 @@ const Type = () => {
 
     const { state, dispatch } = useContext(AppContext);
 
-    const handleUpdateState = (event: React.ChangeEvent<{ value: string }>, field: string) => {
+    const handleUpdateState = (value: string, field: string) => {
         dispatch({
             type: 'SET_ANSWER',
             field: field,
-            payload: event.target.value
+            payload: value
         })
     }
 
@@ -21,7 +21,10 @@ const Type = () => {
             <Grid container>
                 <Grid item xs={5}>
                     <FormControl component="fieldset">
-                        <RadioGroup onChange={(e) => { handleUpdateState(e, 'type') }} value={state?.answers?.type} aria-label="type" row name="type">
+                        <RadioGroup onChange={(e) => { 
+                            handleUpdateState(e.target.value, 'type');
+                            e?.target?.value === 'single' && handleUpdateState('1', 'ticketUsage')
+                            }} value={state?.answers?.type} aria-label="type" row name="type">
                             <FormControlLabel value="single" control={<Radio color="primary" />} label="Single Ticket" />
                             <FormControlLabel value="multiple" control={<Radio color="primary" />} label="Multi Ticket" />
                         </RadioGroup>
@@ -43,8 +46,9 @@ const Type = () => {
                                     inputProps={{ min: '1', max: '7' }}
                                     type="number"
                                     value={state?.answers?.ticketUsage}
-                                    onChange={(e) => { handleUpdateState(e, 'ticketUsage') }}
-                                />                            </Grid>
+                                    onChange={(e) => { handleUpdateState(e.target.value, 'ticketUsage') }}
+                                />
+                            </Grid>
                         </Grid>
                     </Grid>
                 }
