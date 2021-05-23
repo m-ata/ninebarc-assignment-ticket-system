@@ -32,7 +32,7 @@ const DateTimePicker = () => {
 
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Grid container>
+            <Grid container alignItems={'center'}>
                 <Grid item xs={4}>
                     <KeyboardDatePicker
                         disableToolbar
@@ -61,10 +61,10 @@ const DateTimePicker = () => {
                     />
                 </Grid>
                 <Grid item xs={4}>
-                <FormControl component="fieldset">
+                    <FormControl component="fieldset" style={{marginTop: 10}}>
                         <RadioGroup onChange={handleDurationTypeChange} value={state?.answers?.durationType} aria-label="type" row name="type">
-                            <FormControlLabel value="departure" control={<Radio />} label="Departure" />
-                            <FormControlLabel value="arrival" control={<Radio />} label="Arrival" />
+                            <FormControlLabel value="departure" control={<Radio color="primary" />} label="Departure" />
+                            <FormControlLabel value="arrival" control={<Radio color="primary" />} label="Arrival" />
                         </RadioGroup>
                     </FormControl>
                 </Grid>

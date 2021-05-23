@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TextField, Grid, FormControl } from '@material-ui/core';
+import { TextField, Grid, FormControl, FormLabel } from '@material-ui/core';
 import AppContext from '../../../store/context';
 
 const { useContext } = React
@@ -17,9 +17,10 @@ const Name = () => {
     }
 
     return (
-        <Grid container>
+        <Grid container justify={'center'}>
             <FormControl component="fieldset">
-                <TextField size={'small'} variant={'outlined'} id="name" type="text" value={state?.answers?.name} onChange={handleChange} />
+                <FormLabel component="legend"> What is your name ? </FormLabel>
+                <TextField size={'small'} style={{marginTop: 8}} variant={'outlined'} id="name" type="text" value={state?.answers?.name} onChange={handleChange} />
             </FormControl>
         </Grid>
     )

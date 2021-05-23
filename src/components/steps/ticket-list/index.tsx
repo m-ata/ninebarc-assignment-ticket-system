@@ -1,11 +1,26 @@
 import * as React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
-import { withStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import AppContext from '../../../store/context';
 import { getTime } from '../../../helpers/timeparser';
 import { Ticket } from '../../../interface'
 
-const { useContext, useEffect, useState } = React
+export const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+        '&:hover': {
+            backgroundColor: theme.palette.action.hover
+        },
+        cursor: 'pointer',
+    },
+    selected: {
+        backgroundColor: `#6d80e8`,
+        cursor: 'pointer'
+    }
+  }),
+);
+
+const { useContext, useState } = React
 
 const StyledTableCell = withStyles((theme: Theme) =>
     createStyles({
@@ -27,12 +42,18 @@ const StyledTableRow = withStyles((theme: Theme) =>
             },
             cursor: 'pointer',
         },
+        selected: {
+            backgroundColor: `#6d80e8`,
+            cursor: 'pointer'
+        }
     }),
 )(TableRow);
 
 const TicketList = React.memo(() => {
 
     const { state, dispatch } = useContext(AppContext);
+
+    const classes = useStyles();
 
     const [renderTickets, setRenderTickets] = useState([{
         location: `${state?.answers?.from} - ${state?.answers?.to}`,
@@ -70,10 +91,9 @@ const TicketList = React.memo(() => {
                     {renderTickets.map((ticket, index) => {
                         const departureDuration = ticket.time.departure.split(':');
                         const arrivalDuration = ticket.time.arrival.split(':');
-                        const time = `${departureDuration[0]}:${departureDuration[1]} ${departureDuration[2].split(' ')[1]} dep - ${arrivalDuration[0]}:${arrivalDuration[1]} ${arrivalDuration[2].split(' ')[1]} arr`
-
+                        const time = `${departureDuration[0]}:${departureDuration[1]} ${departureDuration[2].split(' ')[1]} dep - ${arrivalDuration[0]}:${arrivalDuration[1]} ${arrivalDuration[2].split(' ')[1]} arr`;
                         return (
-                            <StyledTableRow key={index} onClick={(e) => handleTicket({
+                            <TableRow className={ticket.time.duration === state?.ticket?.duration ? classes.selected : classes.root} key={index} onClick={() => handleTicket({
                                 location: `${state?.answers?.from} - ${state?.answers?.to}`,
                                 time: `${departureDuration[0]}:${departureDuration[1]} ${departureDuration[2].split(' ')[1]} dep - ${arrivalDuration[0]}:${arrivalDuration[1]} ${arrivalDuration[2].split(' ')[1]} arr`,
                                 duration: ticket.time.duration,
@@ -85,7 +105,7 @@ const TicketList = React.memo(() => {
                                 <StyledTableCell align="right">{time} </StyledTableCell>
                                 <StyledTableCell align="right">{ticket.time.duration}</StyledTableCell>
                                 <StyledTableCell align="right">{ticket.price}</StyledTableCell>
-                            </StyledTableRow>
+                            </TableRow>
                         )
                     })}
                 </TableBody>

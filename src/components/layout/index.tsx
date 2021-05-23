@@ -4,7 +4,8 @@ import Steps from '../steps'
 import appReducer from '../../store/reducers';
 import AppContext from '../../store/context';
 import { initialState } from '../../store/constants';
-import Ticket from '../ticket'
+import Ticket from '../ticket';
+import { useStyles } from './style';
 
 const { useState } = React
 
@@ -20,6 +21,8 @@ const Layout = () => {
         activeStep: 0,
         isRenderTicket: false
     });
+
+    const classes = useStyles();
 
     const finalStep = 4;
     const steps = getSteps();
@@ -45,7 +48,7 @@ const Layout = () => {
 
     return (
         <AppContext.Provider value={{state,dispatch}}>
-            <Container>
+            <Container className={classes.layout}>
                 <Grid container >
                     <Grid item xs={12}>
                         <Stepper alternativeLabel activeStep={activeStep}>
@@ -57,16 +60,16 @@ const Layout = () => {
                         </Stepper>
                     </Grid>
                 </Grid>
-                <Grid container>
+                <Grid container className={classes.step} justify={'center'} alignItems={'center'}>
                     <Grid item xs={12}>
                         <Steps activeStep={activeStep} />
                     </Grid>
                 </Grid>
-                <Grid container>
+                <Grid container justify={'flex-end'}>
                     {
-                        activeStep > 0 && <Button onClick={handleBack}> Back </Button>
+                        activeStep > 0 && <Button className={classes.backButton} onClick={handleBack}> Back </Button>
                     }
-                    <Button onClick={handleNext}> {activeStep === finalStep ?  'Finish' : 'Next'} </Button>
+                    <Button className={classes.nextButton} onClick={handleNext}> {activeStep === finalStep ?  'Finish' : 'Next'} </Button>
                 </Grid>
             </Container>
             {
