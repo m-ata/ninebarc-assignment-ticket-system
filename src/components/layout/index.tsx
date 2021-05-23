@@ -19,7 +19,7 @@ const Layout = () => {
 
     const [localState, setLocalState] = useState({
         activeStep: 0,
-        isRenderTicket: false
+        isRenderTicket: false,
     });
 
     const classes = useStyles();
@@ -46,6 +46,19 @@ const Layout = () => {
         setLocalState(prev => ({ ...prev, activeStep: activeStep - 1 }))
     }
 
+    const handleDisableNext = () => {
+        switch(activeStep) {
+            case 0:
+                return !state?.answers?.name?.trim();
+            case 2:
+                return !(state?.answers?.from && state?.answers?.to);
+            case 4:
+                return !state?.ticket?.location;
+            default:
+                return false
+        }
+    }
+
     return (
         <AppContext.Provider value={{state,dispatch}}>
             <Container className={classes.layout}>
@@ -69,7 +82,7 @@ const Layout = () => {
                     {
                         activeStep > 0 && <Button className={classes.backButton} onClick={handleBack}> Back </Button>
                     }
-                    <Button className={classes.nextButton} onClick={handleNext}> {activeStep === finalStep ?  'Finish' : 'Next'} </Button>
+                    <Button disabled={handleDisableNext()} className={classes.nextButton} onClick={handleNext}> {activeStep === finalStep ?  'Finish' : 'Next'} </Button>
                 </Grid>
             </Container>
             {

@@ -42,6 +42,7 @@ const Ticket = ({ resetState }: any) => {
             onClose={handleComplete}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
+            disableBackdropClick
         >
             <DialogTitle id="alert-dialog-title">
                 {`Hi ${state?.answers?.name} Your Ticket is Ready :)`}

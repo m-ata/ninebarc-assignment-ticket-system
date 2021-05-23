@@ -8,11 +8,23 @@ import {
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
-const { useContext } = React
+const { useContext, useEffect } = React
 
 const DateTimePicker = () => {
 
     const { state, dispatch } = useContext(AppContext);
+
+    useEffect(() => {
+        dispatch({
+            type: 'SET_TICKET',
+            payload: {
+                location: '',
+                time: '',
+                duration: '',
+                price: ''
+            }
+        });
+    }, []);
 
     const handleDateChange = (date: Date | null) => {
         dispatch({

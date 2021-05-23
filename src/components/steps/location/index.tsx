@@ -2,7 +2,7 @@ import * as React from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { TextField, Grid } from '@material-ui/core'
 import AppContext from '../../../store/context';
-
+import { getStations } from '../../../helpers/stations';
 const { useContext, useState } = React
 
 const Location = () => {
@@ -11,8 +11,6 @@ const Location = () => {
 
     const [fromInputValue, setFromInputValue] = useState('')
     const [toInputValue, setToInputValue] = useState('')
-
-    const stations = ['Test1', 'Test2', 'Test3', 'Test4', 'Test5']
 
     const handleUpdateState = (value: any, field: string) => {
         dispatch({
@@ -29,7 +27,7 @@ const Location = () => {
                     size={'small'}
                     fullWidth={true}
                     id="from"
-                    options={stations}
+                    options={getStations(state?.answers?.to, 'from')}
                     value={state?.answers?.from}
                     autoHighlight
                     getOptionLabel={(option) => option}
@@ -56,7 +54,7 @@ const Location = () => {
                     size={'small'}
                     fullWidth={true}
                     id="to"
-                    options={stations}
+                    options={getStations(state?.answers?.from ,'to')}
                     value={state?.answers?.to}
                     autoHighlight
                     getOptionLabel={(option) => option}

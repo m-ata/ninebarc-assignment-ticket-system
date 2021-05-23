@@ -34,21 +34,6 @@ const StyledTableCell = withStyles((theme: Theme) =>
     }),
 )(TableCell);
 
-const StyledTableRow = withStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            '&:hover': {
-                backgroundColor: theme.palette.action.hover
-            },
-            cursor: 'pointer',
-        },
-        selected: {
-            backgroundColor: `#6d80e8`,
-            cursor: 'pointer'
-        }
-    }),
-)(TableRow);
-
 const TicketList = React.memo(() => {
 
     const { state, dispatch } = useContext(AppContext);
