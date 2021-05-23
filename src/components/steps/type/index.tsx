@@ -16,6 +16,8 @@ const Type = () => {
         })
     }
 
+    const blockInvalidChar = (e: any) => ['e', 'E', '+', '-', ',', '.'].includes(e.key) && e.preventDefault();
+
     return (
         <React.Fragment>
             <Grid container>
@@ -46,7 +48,15 @@ const Type = () => {
                                     inputProps={{ min: '1', max: '7' }}
                                     type="number"
                                     value={state?.answers?.ticketUsage}
-                                    onChange={(e) => { handleUpdateState(e.target.value, 'ticketUsage') }}
+                                    onKeyDown={blockInvalidChar}
+                                    onChange={(e) => {
+                                        if (!e.target.value || parseInt(e.target.value) < 1 || parseInt(e.target.value) > 7) {
+                                            return
+                                        } else {
+                                            handleUpdateState(e.target.value, 'ticketUsage')
+                                        }
+                                        }
+                                    }
                                 />
                             </Grid>
                         </Grid>

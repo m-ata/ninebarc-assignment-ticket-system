@@ -81,6 +81,8 @@ const Layout = () => {
     switch (activeStep) {
       case 0:
         return !state?.answers?.name?.trim();
+      case 1:
+        return (state?.answers?.ticketUsage) < 1 && (state?.answers?.ticketUsage) > 7;
       case 2:
         return !(state?.answers?.from && state?.answers?.to);
       case 4:
