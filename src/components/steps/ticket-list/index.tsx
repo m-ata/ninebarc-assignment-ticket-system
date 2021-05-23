@@ -58,15 +58,15 @@ const TicketList = React.memo(() => {
     const [renderTickets, setRenderTickets] = useState([{
         location: `${state?.answers?.from} - ${state?.answers?.to}`,
         time: getTime(state?.answers?.date, state?.answers?.durationType),
-        price: `${Math.floor(Math.random() * 3) + 3},00 €`
+        price: `${(Math.floor(Math.random() * 3) + 3) * state?.answers?.ticketUsage},00 €`
     }, {
         location: `${state?.answers?.from} - ${state?.answers?.to}`,
         time: getTime(state?.answers?.date, state?.answers?.durationType),
-        price: `${Math.floor(Math.random() * 3) + 3},00 €`
+        price: `${(Math.floor(Math.random() * 3) + 3) * state?.answers?.ticketUsage},00 €`
     }, {
         location: `${state?.answers?.from} - ${state?.answers?.to}`,
         time: getTime(state?.answers?.date, state?.answers?.durationType),
-        price: `${Math.floor(Math.random() * 3) + 3},00 €`
+        price: `${(Math.floor(Math.random() * 3) + 3) * state?.answers?.ticketUsage},00 €`
     }]);
 
     const handleTicket = (selectedTicket: Ticket) => {
