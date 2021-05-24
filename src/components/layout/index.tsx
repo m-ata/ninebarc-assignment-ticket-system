@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Container, Grid, Stepper, Step, StepLabel, Button, StepConnector, StepIconProps } from '@material-ui/core';
+import { Container, Grid, Stepper, Step, StepLabel, Button, Typography, StepIconProps } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Steps from '../steps'
 import appReducer from '../../store/reducers';
@@ -95,6 +95,16 @@ const Layout = () => {
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <Container className={classes.layout}>
+        <Grid container justify={'center'}>
+          <Grid item xs={12}>
+            <Typography component={'h2'} variant={'h2'} className={classes.heading} >
+              Hello
+            </Typography>
+            <Typography component={'h4'} variant={'h4'} className={classes.heading}>
+              What do you want to explore ?
+            </Typography>
+          </Grid>
+        </Grid>
         <Grid container >
           <Grid item xs={12}>
             <Stepper connector={<ColorlibConnector />} alternativeLabel activeStep={activeStep}>

@@ -4,8 +4,13 @@ import { StepConnector } from '@material-ui/core';
 export const useStyles = makeStyles(() =>
   createStyles({
     layout: {
-      maxWidth: 800,
+      maxWidth: 1000,
       margin: 'auto'
+    },
+    heading: {
+      textAlign: "center",
+      fontFamily: 'MuseoSans-100',
+      color: '#969393'
     },
     step: {
         minHeight: 280

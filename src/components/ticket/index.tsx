@@ -19,7 +19,7 @@ const useStyles = makeStyles({
         maxWidth: 345,
     },
     media: {
-        height: 250,
+        height: 320,
     },
 });
 
@@ -43,6 +43,7 @@ const Ticket = ({ resetState }: any) => {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             disableBackdropClick
+            fullWidth
         >
             <DialogTitle id="alert-dialog-title">
                 {`Hi ${state?.answers?.name} Your Ticket is Ready :)`}
